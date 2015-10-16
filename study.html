@@ -1,0 +1,73 @@
+<DOCTYPE! html>
+<html ng-app="codeCards">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="./css/flippy.css">
+		<link rel="stylesheet" type="text/css" href="./css/flippy-fancy.css">
+		<script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/angular-cookies.js"></script>
+        <script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+        <script type="text/javascript" src="js/flippy.js"></script>
+    	<script type="text/javascript" src="js/app.js"></script>
+    	
+
+		<title></title>
+	</head>
+
+	<body>
+
+        <!--Navigation Bar-->
+        <nav class="navbar navbar-default" ng-controller="navbarController">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <p class="navbar-text">Code Cards</p>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-show="loggedIn" dropdown>
+                        <a href="" dropdown-toggle>{{signIn}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="account.html">Decks</a></li>
+                            <li><a href="" ng-click="logOut()">Sign Out</a></li>
+                        </ul>
+                    </li>
+                    <li ng-show="!loggedIn"><a href="login.html">Sign In/Register</a></li>
+                </ul>
+            </div>
+        </nav>
+    
+		<div ng-controller="studyController">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <flippy
+                        class="fancy"
+                        ng-click="flip()"
+                        flip-duration="800"
+                        timing-function="ease-in-out"
+                        ng-repeat="card in cards"
+                        ng-show="showCard($index)">
+
+                        <flippy-front>
+                                <h1>{{card.term}}</h1>
+                                <img src="includes/index_card.png">
+                        </flippy-front>
+
+                        <flippy-back>
+                            <h1>{{card.description}}</h1>
+                            <img src="includes/index_card.png">
+                        </flippy-back>
+
+                    </flippy>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-md-offset-4">
+                    <pagination ng-model="index" class="pagination-sm" max-size="6" total-items="totalItems" items-per-page="1" />
+                </div>
+            </div>
+        </div>
+
+	</body>
+</html>

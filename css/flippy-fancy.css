@@ -1,0 +1,55 @@
+flippy.fancy {
+  float: left;
+  margin: 50px 10px 10px 0;
+  position: relative;
+  font-size: .8em;
+  cursor: pointer;
+  width: 600px;
+  height: 350px;
+}
+flippy.fancy img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0.4;
+  z-index: -1;
+}
+flippy.fancy flippy-front {
+  padding-top: 95px;
+  float: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  width: inherit;
+  height: inherit;
+  border: 1px solid #ccc;
+  background: white;
+  text-align: center;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+}
+flippy.fancy flippy-front.flipped {
+  border-color: #eee;
+  /*background: #333;*/
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+flippy.fancy flippy-back {
+  padding-top: 95px;
+  float: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 800;
+  width: inherit;
+  height: inherit;
+  border: 1px solid #ccc;
+  background: white;
+  text-align: center;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+}
+flippy.fancy flippy-back.flipped {
+  /*background: #80868d;*/
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,63 @@
+<DOCTYPE! html>
+<html ng-app="codeCards">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/angular-cookies.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+		<script type="text/javascript" src="js/flippy.js"></script>
+    	<script type="text/javascript" src="js/app.js"></script>
+
+		<title>Dashboard</title>
+	</head>
+
+	<body>
+
+		<!--Navigation Bar-->
+		<nav class="navbar navbar-default" ng-controller="navbarController">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<p class="navbar-text">Code Cards</p>
+			        <li><a href="index.html">Home</a></li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+			        <li ng-show="loggedIn" dropdown>
+				      	<a href="" dropdown-toggle>{{signIn}} <span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+					        <li><a href="dashboard.html">Decks</a></li>
+					       	<li><a href="" ng-click="logOut()">Sign Out</a></li>
+				        </ul>
+			        </li>
+			        <li ng-show="!loggedIn"><a href="login.html">Sign In/Register</a></li>
+			    </ul>
+			</div>
+		</nav>
+
+		<br />
+		<div ng-controller= "dashboardController" class="col-md-6 col-md-offset-3">
+			<table class="table table-hover">
+				<thead id="table-head">
+					<tr>
+						<td class="col-md-4"><strong>DECKS</strong></td>
+						<td class="col-md-1"></td>
+						<td class="col-md-1"><button class="btn btn-default" ng-click="newDeck()">Add Deck</button></td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr class="warning" ng-show="!decks">
+						<td>You don't have any study card decks yet. Make one!</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr ng-repeat="deck in decks">
+						<td ng-click="study(deck)"><a href="#">{{deck}}</a></td>
+						<td><button class="btn btn-default align-center" ng-click="edit(deck)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></td>
+						<td><button class="btn btn-default align-center" ng-click="delete(deck)"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
