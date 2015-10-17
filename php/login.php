@@ -7,7 +7,7 @@
 	// Searches for user based on email or their username
 	$query = 'SELECT username FROM users WHERE (email = "' . $objData->user . '" OR username = "' . strtolower($objData->user) . '") AND password = "' . md5($objData->password) . '"';
 
-	$results = mysqli_query($conn, $query);
+	$results = $conn->query($query);;
 
 	// If no results are returned send error
 	if ($results->num_rows == 0){

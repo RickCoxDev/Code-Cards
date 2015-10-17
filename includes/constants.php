@@ -11,8 +11,7 @@
     $password   = "";
 
     // Sets up connection with server
-    $conn = mysql_connect($host_name, $user_name, $password);
-    mysql_select_db($database, $conn);
+    $conn = new mysqli($host_name, $user_name, $password, $database);
 
     // Recieves input from app.js
 	$data = file_get_contents("php://input");

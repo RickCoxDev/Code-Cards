@@ -7,7 +7,7 @@
 
 		$query = 'SELECT term, description, deck FROM ' . $objData->user . ' WHERE deck = "' . $objData->deckName . '"';
 
-		if ($results = mysqli_query($conn, $query)) {
+		if ($results = $conn->query($query)) {
 
 			// Pushes each individual card into the array
 			$output = [];

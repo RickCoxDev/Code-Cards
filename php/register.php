@@ -8,13 +8,13 @@
 
 	// If the email is not already
 	// used by another user
-	if ($results->num_rows() == 0){
+	if ($results->num_rows == 0){
 		$query = 'SELECT * FROM users WHERE username = "' . $objData->username . '" LIMIT 1';
 		$results = $conn->query($query);
 
 		// If the username is not already
 		// used by another user
-		if ($results->num_rows() == 0){
+		if ($results->num_rows == 0){
 			$query = 'INSERT INTO users (email, username, password) VALUES ("' . $objData->email . '", "' . strtolower($objData->username) . '",  "' . md5($objData->password) . '")';
 			$conn->query($query);
 
