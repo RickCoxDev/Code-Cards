@@ -1,0 +1,27 @@
+<div class="container">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label>Username</label>
+			<input type="text" ng-model="username" />
+		</div>
+
+		<div class="form-group">
+			<label>Email</label>
+			<input type="text" ng-model="email" />
+		</div>
+
+		<div class="form-group">
+			<h3>Change Password</h3>
+			<label>Current Password</label>
+			<input type="text" ng-model="password" />
+			<label>New Password</label>
+			<input type="text" ng-model="nw_password" />
+			<label>Confirm Password</label>
+			<input type="text" ng-model="cfrm_password" />
+			<input type="submit" class="btn btn-default" ng-click="saveChanges()" value="Save Changes" />
+		</div>
+
+		<alert ng-show="showAlert" type="{{alert.type}}" close="showAlert = false">{{alert.msg}}</alert>
+		
+	</form>
+</div>
