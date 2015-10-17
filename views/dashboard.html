@@ -1,0 +1,24 @@
+<div class="col-md-6 col-md-offset-3">
+	<table class="table table-hover">
+		<thead id="table-head">
+			<tr>
+				<td class="col-md-4"><strong>DECKS</strong></td>
+				<td class="col-md-1"></td>
+				<td class="col-md-1"><button class="btn btn-default" ng-click="newDeck()">Add Deck</button></td>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr class="warning" ng-show="!decks">
+				<td>You don't have any study card decks yet. Make one!</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="deck in decks">
+				<td ng-click="study(deck)"><a href="#">{{deck}}</a></td>
+				<td><button class="btn btn-default align-center" ng-click="edit(deck)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></td>
+				<td><button class="btn btn-default align-center" ng-click="delete(deck)"><span class="glyphicon glyphicon-trash"></span> Delete</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

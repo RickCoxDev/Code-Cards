@@ -1,6 +1,45 @@
 (function(){
 
-	var app = angular.module('codeCards', ['ngCookies', 'ui.bootstrap', 'angular-flippy']);
+	var app = angular.module('codeCards', ['ngCookies', 'ngRoute', 'ui.bootstrap', 'angular-flippy']);
+
+	app.config(function($routeProvider, $locationProvider) {
+		$routeProvider
+
+		.when("/" , {
+			templateUrl: "views/home.html"
+		})
+
+		.when("/login" , {
+			templateUrl: "views/login.html",
+			controller: "loginController"
+		})
+
+		.when("/dashboard" , {
+			templateUrl: "views/dashboard.html",
+			controller: "dashboardController"
+		})
+
+		.when("/edit" , {
+			templateUrl: "views/edit.html",
+			controller: "editController"
+		})
+
+		.when("/study" , {
+			templateUrl: "views/study.html",
+			controller: "studyController"
+		})
+
+		.when("/account", {
+			templateUrl: "views/account.html",
+			controller: "accountController"
+		})
+
+		.otherwise({
+			redirectTo: "/"
+		});
+
+		$locationProvider.html5Mode(true);
+	});
 
 	// Controller for Navigation Bar
 	app.controller("navbarController", ["$scope", "$window", "$cookies", function($scope, $window, $cookies){
