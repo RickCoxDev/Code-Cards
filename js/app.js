@@ -9,7 +9,7 @@
 		// signed in
 		$scope.$watch(function(){
 			watch = $cookies.get("authorized");
-			return watch
+			return watch;
 		}, 
 		function(newVal, oldVal){
 			if (newVal == "true") {
@@ -20,14 +20,14 @@
 				$scope.signIn = "";
 				$scope.loggedIn = false;
 			}
-		})
+		});
 
 		// Logout function
 		$scope.logOut = function(){
 			$cookies.put("authorized", "false");
 			$cookies.put("user", "");
 			$window.location.href = "login.html";
-		}
+		};
 	}]);
 
 	app.controller("loginController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
@@ -52,13 +52,12 @@
 
 		// Login function
 		$scope.checklogin = function(){
-
 			// If form is complete
 			if ($scope.login_usr !== undefined && $scope.login_pwd !== undefined) {
 
 				var request = $http({
-		    			method: "POST",
-		   				url: "php/login.php",
+		    			method: "GET",
+		   				url: "api/1.0/hello/Rick",
 		    			data: {
 		        			user: $scope.login_usr,
 		        			password: $scope.login_pwd
@@ -67,7 +66,9 @@
 				});
 
 				request.success(function (data) {
-	    			if (data.error == false) {
+	    			console.log(data);
+
+	    			if (data.error === false) {
 	    				$cookies.put("user", data.output);
 	    				$cookies.put("authorized", "true");
 	    				$window.location.href = "account.html";
@@ -80,7 +81,7 @@
 			}
 			else {
 				$scope.showAlert = true;
-				$scope.alert = {type: "warning", msg: "Please complete the login form."}
+				$scope.alert = {type: "warning", msg: "Please complete the login form."};
 			}	
 		};
 
@@ -114,7 +115,7 @@
 			    				$scope.showAlert = true;
 			    				$scope.alert = {type: "warning", msg:"That username is already being used."};
 			    		}
-			    		else if (data.error == false) {
+			    		else if (data.error === false) {
 					    			$cookies.put("user", data.output);
 					    			$cookies.put("authorized", "true");
 				    				$window.location.href = "account.html";
@@ -123,7 +124,7 @@
 				}
 				else {
 					$scope.showAlert = true;
-					$scope.alert = {type: "danger", msg: "The passwords do not match."}
+					$scope.alert = {type: "danger", msg: "The passwords do not match."};
 				}
 			}
 			else {
@@ -131,13 +132,13 @@
 				$scope.alert = {type: "warning", msg: "Please complete the registration form."};
 			}
 		};
-	}])
+	}]);
 
 	// Controller for the main account page
 	app.controller("dashboardController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
 		
 		if ($cookies.get("authorized") != "true") {
-			$window.location.href = "login.html"
+			$window.location.href = "login.html";
 		}
 
 		// Fetches the all deck names
@@ -151,7 +152,7 @@
 		});
 
 		request.success(function(data) {
-			if (data.length == 0){
+			if (data.length === 0){
 				$scope.decks = false;
 			}
 			else {
@@ -180,12 +181,12 @@
 					},
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 				});
-			}
 
-			request.success(function(data){
+				request.success(function(data){
 				$scope.decks = data;
 				$window.location.href = "account.html";
 			});
+			}
 		};
 
 		// Creates new deck and redirects to edit page
@@ -199,7 +200,7 @@
 			$cookies.put("deck", deck);
 			$window.location.href = "study.html";
 		};
-	}])
+	}]);
 
 	// Controller for the deck edit page
 	app.controller("editController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
@@ -251,7 +252,7 @@
 				$window.location.href = "account.html";
 			});
 		};
-	}])
+	}]);
 
 	// Controller for the deck study page
 	app.controller("studyController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
@@ -273,13 +274,13 @@
 			$scope.cards = data;
 			$scope.deckName = data[0].deck;
 			$scope.index = 1;
-			$scope.totalItems = $scope.cards.length
+			$scope.totalItems = $scope.cards.length;
 			console.log($scope.totalItems);
 		});
 
 		$scope.showCard = function(card){
 			return card === $scope.index-1;
 		};
-	}])
+	}]);
 
 })();

@@ -1,0 +1,16 @@
+{
+    "name": "richard/code-cards-api",
+    "description": "Restful API for Code Cards.",
+    "require": {
+        "monolog/monolog": "^1.17",
+        "slim/slim": "^2.6",
+        "flynsarmy/slim-monolog": "^1.0",
+        "firebase/php-jwt": "^3.0"
+    },
+    "authors": [
+        {
+            "name": "Richard",
+            "email": "cox.richard200@gmail.com"
+        }
+    ]
+}
