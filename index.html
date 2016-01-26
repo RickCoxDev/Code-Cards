@@ -1,51 +1,86 @@
 <DOCTYPE! html>
 <html ng-app="codeCards">
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script type="text/javascript" src="js/angular.js"></script>
-		<script type="text/javascript" src="js/angular-cookies.js"></script>
-		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
-		<script type="text/javascript" src="js/flippy.js"></script>
-    	<script type="text/javascript" src="js/app.js"></script>
 		<title>Code Cards</title>
 	</head>
 
 	<body>
 		<!--Navigation Bar-->
-        <nav class="navbar navbar-default" ng-controller="navbarController">
+        <nav class="navbar navbar-default no-padding" ng-controller="navbarController">
             <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <p class="navbar-text">Code Cards</p>
-                    <li><a href="index.html">Home</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="loggedIn" dropdown>
-                        <a href="" dropdown-toggle>{{signIn}} <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="account.html">Decks</a></li>
-                            <li><a href="" ng-click="logOut()">Sign Out</a></li>
-                        </ul>
-                    </li>
-                    <li ng-show="!loggedIn"><a href="login.html">Sign In/Register</a></li>
-                </ul>
+            	<div class="navbar-header">
+			        <button type="button" class="navbar-toggle collapsed" ng-click="isCollapsed = !isCollapsed" aria-expanded="false">
+			          <span class="sr-only">Toggle navigation</span>
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			        </button>
+			        <a class="navbar-brand" href="#">Code Cards</a>
+			    </div>
+
+			    <div class="collapse navbar-collapse" uib-collapse="isCollapsed">
+	                <ul class="nav navbar-nav navbar-right">
+	                    <li ng-show="loggedIn" dropdown>
+	                        <a href="" dropdown-toggle>{{signIn}} <span class="caret"></span></a>
+	                        <ul class="dropdown-menu">
+	                            <li><a href="account.html">Decks</a></li>
+	                            <li><a href="" ng-click="logOut()">Sign Out</a></li>
+	                        </ul>
+	                    </li>
+	                    <li ng-show="!loggedIn"><a href="login.html">Sign In/Register</a></li>
+	                </ul>
+                </div>
             </div>
         </nav>
 
-	<div class="jumbotron">
-		<div class="container">
-            <div class="col-md-6 col-md-offset-4">
-			     <h1><strong>Code Cards</strong></h1>
-            </div>
+	<div class="container">
+		<div class="title row">
+			<h1 class="center">Code Cards</h1>
 		</div>
 	</div>
-	<div class="jumbotron">
-		<div class="container">
+	<div class="container">
+		<div class="row">
 			<div class="text-center">
-				<h3>Developers are required to learn and remember a lot of functions and libraries. Especially since programming languages are constantly being updated and changed.</h2>
+				<h3>Learning to program can be difficult. There is a lot to remember and even more to learn. Code Cards is a study card platform that helps you learn languages and frameworks. It offers a place to store everything you need to learn and a system to remember it.</h3>
 			</div>
 		</div>
 	</div>
+	<br/>
+	<div class="container no-padding">
+		<div class="row">
+			<div class="text-center">
+				<h2><strong>Features</strong></h2> 
+			</div>
+		</div>
+	</div>
+	<div class="container no-padding">
+		<div class="row">
+			<div class="col-sm-4">
+				<h4 class="text-center">Create/Edit Study Cards<br/><br/></h4>
+				<h5>Create and edit study cards for individual terms or functions and organize them into decks.</h5>
+			</div>
+			<div class="col-sm-4">
+				<h4 class="text-center">Import Quizlet Decks<br/>(Coming Soon)</h4>
+				<h5>Already use quizlet for your study cards? Import them into Code Cards.</h5>
+			</div>
+			<div class="col-sm-4">
+				<h4 class="text-center">Syntax Highlighting<br/>(Coming Soon)</h4>
+				<h5>Define a language for each deck to see it properly highlighted like you would see it in programming text editor.</h5>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/live.js"></script>
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="js/angular-cookies.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.14.3.js"></script>
+	<script type="text/javascript" src="js/flippy.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 
 	</body>
 

@@ -10,7 +10,7 @@
 	
 	// For each deck name it gets pushed into output array	
 	if ($results !== NULL) {
-		while ($row = $results->fetch_row) {
+		while ($row = $results->fetch_row()) {
 			array_push($output, $row[0]);
 		}
 		echo json_encode($output);

@@ -5,6 +5,8 @@
 	// Controller for Navigation Bar
 	app.controller("navbarController", ["$scope", "$window", "$cookies", function($scope, $window, $cookies){
 		
+		$scope.isCollapsed = true;
+
 		// Watches browser cookies to see if the user is
 		// signed in
 		$scope.$watch(function(){
@@ -248,7 +250,7 @@
 
 			request.success(function(data) {
 				console.log(data);
-				$window.location.href = "account.html";
+				// $window.location.href = "account.html";
 			});
 		};
 	}])
