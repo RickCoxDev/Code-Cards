@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('codeCards', ['ui.router', 'ui.bootstrap', 'angular-flippy']);
+	var app = angular.module('codeCards', ['ui.router', 'ui.bootstrap', 'angular-flippy', 'ngCookies']);
 
 	app.config(function($stateProvider, $urlRouterProvider) {
 		
