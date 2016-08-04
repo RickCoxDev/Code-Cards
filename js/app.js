@@ -1,44 +1,16 @@
 (function(){
 
-	var app = angular.module('codeCards', ['ngCookies', 'ngRoute', 'ui.bootstrap', 'angular-flippy']);
+	var app = angular.module('codeCards', ['ui.router', 'ui.bootstrap', 'angular-flippy']);
 
-	app.config(function($routeProvider, $locationProvider) {
-		$routeProvider
+	app.config(function($stateProvider, $urlRouterProvider) {
+		
+		$urlRouterProvider.otherwise('/home');
 
-		.when("/" , {
-			templateUrl: "views/home.html"
-		})
-
-		.when("/login" , {
-			templateUrl: "views/login.html",
-			controller: "loginController"
-		})
-
-		.when("/dashboard" , {
-			templateUrl: "views/dashboard.html",
-			controller: "dashboardController"
-		})
-
-		.when("/edit" , {
-			templateUrl: "views/edit.html",
-			controller: "editController"
-		})
-
-		.when("/study" , {
-			templateUrl: "views/study.html",
-			controller: "studyController"
-		})
-
-		.when("/account", {
-			templateUrl: "views/account.html",
-			controller: "accountController"
-		})
-
-		.otherwise({
-			redirectTo: "/"
-		});
-
-		$locationProvider.html5Mode(true);
+		$stateProvider        
+	        .state('home', {
+	            url: '/home',
+	            templateUrl: 'views/home.html'
+	        });
 	});
 
 	// Controller for Navigation Bar
@@ -50,7 +22,7 @@
 		// signed in
 		$scope.$watch(function(){
 			watch = $cookies.get("authorized");
-			return watch
+			return watch;
 		}, 
 		function(newVal, oldVal){
 			if (newVal == "true") {
