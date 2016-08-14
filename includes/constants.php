@@ -8,7 +8,7 @@
     $host_name  = "localhost";
     $database   = "codecards";
     $user_name  = "root";
-    $password   = "";
+    $password   = "123123";
 
     // Sets up connection with server
     $conn = new mysqli($host_name, $user_name, $password, $database);

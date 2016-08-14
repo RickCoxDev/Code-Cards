@@ -1,8 +1,9 @@
 <div class="col-md-6 col-md-offset-3">
     <flippy
         class="fancy"
-        ng-click="flip()"
-        flip-duration="800"
+        flip="['click']"
+        flip-back="['click']"
+        duration="800"
         timing-function="ease-in-out"
         ng-repeat="card in cards"
         ng-show="showCard($index)">

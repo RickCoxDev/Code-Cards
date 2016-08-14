@@ -1,20 +1,40 @@
 (function(){
 
-	var app = angular.module('codeCards', ['ui.router', 'ui.bootstrap', 'angular-flippy', 'ngCookies']);
+	var cc = angular.module('codeCards', ['ui.router', 'ui.bootstrap', 'angular-flippy', 'ngCookies']);
 
-	app.config(function($stateProvider, $urlRouterProvider) {
+	cc.config(function($stateProvider, $urlRouterProvider) {
 		
-		$urlRouterProvider.otherwise('/home');
+		// $urlRouterProvider.otherwise('/home');
 
 		$stateProvider        
 	        .state('home', {
 	            url: '/home',
 	            templateUrl: 'views/home.html'
+	        })
+	        .state('login', {
+	        	url: '/login',
+	        	templateUrl: 'views/login.html',
+	        	controller: 'loginController'
+	        })
+	        .state('dashboard', {
+	        	url: '/dashboard',
+	        	templateUrl: 'views/dashboard.html',
+	        	controller: 'dashboardController'
+	        })
+	        .state('study', {
+	        	url: '/study',
+	        	templateUrl: 'views/study.html',
+	        	controller: 'studyController'
+	        })
+	        .state('edit', {
+	        	url: '/edit',
+	        	templateUrl: 'views/edit.html',
+	        	controller: 'editController'
 	        });
 	});
 
 	// Controller for Navigation Bar
-	app.controller("navbarController", ["$scope", "$window", "$cookies", function($scope, $window, $cookies){
+	cc.controller("navbarController", ["$scope", "$state", "$cookies", function($scope, $state, $cookies){
 		
 		$scope.isCollapsed = true;
 
@@ -33,20 +53,20 @@
 				$scope.signIn = "";
 				$scope.loggedIn = false;
 			}
-		})
+		});
 
 		// Logout function
 		$scope.logOut = function(){
 			$cookies.put("authorized", "false");
 			$cookies.put("user", "");
-			$window.location.href = "login.html";
-		}
+			$state.go("login");
+		};
 	}]);
 
-	app.controller("loginController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
+	cc.controller("loginController", ["$scope", "$http", "$state", "$cookies", function($scope, $http, $state, $cookies){
 
 		/*if ($cookies.get("authorized") == "true") {
-			$window.location.href = "account.html"
+			$state.go("dashboard");
 		}*/
 
 		$scope.showAlert = false;
@@ -83,7 +103,7 @@
 	    			if (data.error == false) {
 	    				$cookies.put("user", data.output);
 	    				$cookies.put("authorized", "true");
-	    				$window.location.href = "account.html";
+	    				$state.go("dashboard");
 	    			}
 	    			else {
 	    				$scope.showAlert = true;
@@ -118,7 +138,6 @@
 					});
 
 					request.success(function (data) {
-						console.log(data);
 						if (data.error == "email") {
 			    			$scope.showAlert = true;
 			    			$scope.alert = {type: "warning", msg:"That email is already being used."};
@@ -127,10 +146,10 @@
 			    				$scope.showAlert = true;
 			    				$scope.alert = {type: "warning", msg:"That username is already being used."};
 			    		}
-			    		else if (data.error == false) {
+			    		else if (data.error === false) {
 					    			$cookies.put("user", data.output);
 					    			$cookies.put("authorized", "true");
-				    				$window.location.href = "account.html";
+				    				$state.go("dashboard");
 			    		}
 					});
 				}
@@ -144,13 +163,13 @@
 				$scope.alert = {type: "warning", msg: "Please complete the registration form."};
 			}
 		};
-	}])
+	}]);
 
 	// Controller for the main account page
-	app.controller("dashboardController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
+	cc.controller("dashboardController", ["$scope", "$http", "$state", "$cookies", function($scope, $http, $state, $cookies){
 		
 		if ($cookies.get("authorized") != "true") {
-			$window.location.href = "login.html"
+			$state.go("login");
 		}
 
 		// Fetches the all deck names
@@ -164,19 +183,18 @@
 		});
 
 		request.success(function(data) {
-			if (data.length == 0){
+			if (data.length === 0){
 				$scope.decks = false;
 			}
 			else {
 				$scope.decks = data;
 			}
-			console.log($scope.decks);
 		});
 
 		// Redirects to deck edit page
 		$scope.edit = function(deck) {
 			$cookies.put("deck", deck);
-			$window.location.href = "edit.html";
+			$state.go("edit");
 		};
 
 		// TODO: make modal to confirm deletion
@@ -193,29 +211,29 @@
 					},
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 				});
+				request.success(function(data){
+					$scope.decks = data;
+					$state.go("dashboard");
+				});
 			}
 
-			request.success(function(data){
-				$scope.decks = data;
-				$window.location.href = "account.html";
-			});
 		};
 
 		// Creates new deck and redirects to edit page
 		$scope.newDeck = function() {
 			$cookies.put("deck", "");
-			$window.location.href = "edit.html";
+			$state.go("edit");
 		};
 
 		// Redirects to the study page
 		$scope.study = function(deck) {
 			$cookies.put("deck", deck);
-			$window.location.href = "study.html";
+			$state.go("study");
 		};
-	}])
+	}]);
 
 	// Controller for the deck edit page
-	app.controller("editController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
+	cc.controller("editController", ["$scope", "$http", "$state", "$cookies", function($scope, $http, $state, $cookies){
 
 		var deck = $cookies.get("deck");
 
@@ -231,7 +249,6 @@
 		});
 
 		request.success(function(data) {
-			console.log(data);
 			$scope.cards = data;
 			$scope.deckName = data[0].deck;
 		});
@@ -260,14 +277,13 @@
 			});
 
 			request.success(function(data) {
-				console.log(data);
-				// $window.location.href = "account.html";
+				$state.go("dashboard");
 			});
 		};
-	}])
+	}]);
 
 	// Controller for the deck study page
-	app.controller("studyController", ["$scope", "$http", "$window", "$cookies", function($scope, $http, $window, $cookies){
+	cc.controller("studyController", ["$scope", "$http", "$state", "$cookies", function($scope, $http, $state, $cookies){
 
 		var deck = $cookies.get("deck");
 
@@ -286,13 +302,12 @@
 			$scope.cards = data;
 			$scope.deckName = data[0].deck;
 			$scope.index = 1;
-			$scope.totalItems = $scope.cards.length
-			console.log($scope.totalItems);
+			$scope.totalItems = $scope.cards.length;
 		});
 
 		$scope.showCard = function(card){
 			return card === $scope.index-1;
 		};
-	}])
+	}]);
 
 })();
