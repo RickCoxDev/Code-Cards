@@ -5,3 +5,33 @@
 #table-head {
 	margin-bottom: 50px;
 }
+
+body {
+	font-family: 'Playfair Display', serif;
+}
+
+nav {
+	margin-bottom: 0px !important;
+}
+
+.title {
+	height: 500px;
+	font-size: 150em;
+	background-image: url("../img/hackers.jpg");
+	background-size: cover;
+}
+
+.center {
+	position: relative; /* http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/ */
+  	top: 50%;
+  	transform: translateY(-50%);
+	text-align: center;
+}
+
+h1 {
+	font-size: 100px;
+}
+
+flippy-front, flippy-back {
+	color: black;
+}

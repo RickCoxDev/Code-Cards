@@ -1,0 +1,54 @@
+<div class="col-md-6 col-md-offset-3">
+	<ul class="nav nav-tabs nav-justified">
+		<li ng-class="{ active: isSet(1) }"><a ng-click="set(1)">Login</a></li>
+		<li ng-class="{ active: isSet(2) }"><a ng-click="set(2)">Register</a></li>
+	</ul>
+
+	<br/>
+
+	<form class="form-horizontal col-md-offset-4" ng-show="isSet(1)" novalidate>
+
+		<div class="form-group">
+			<label>Email/Username: </label><br/>
+			<input type="text" ng-model="login_usr" required/>
+		</div>
+
+		<div class="form-group">
+			<label>Password: </label><br/>
+			<input type="password" ng-model="login_pwd" required/>
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-default" type="submit" value="Login" ng-click="checklogin()" />
+		</div>
+	</form>
+
+	<form class="form-horizontal col-md-offset-4" ng-show="isSet(2)">
+
+		<div class="form-group">
+			<label>Username: </label><br/>
+			<input type="text" ng-model="register_usr" />
+		</div>
+
+		<div class="form-group">
+			<label>Email: </label><br/>
+			<input type="email" ng-model="register_em" />
+		</div>
+
+		<div class="form-group">
+			<label>Password: </label><br/>
+			<input type="password" ng-model="register_pwd" />
+		</div>
+
+		<div class="form-group">
+			<label>Confirm Password: </label><br/>
+			<input type="password" ng-model="register_cfrm" />
+		</div>
+
+		<div class="form-group">
+			<input class="btn btn-default" type="submit" value="Register" ng-click="register()">
+		</div>
+	</form>
+				
+	<alert ng-show="showAlert" type="{{alert.type}}" close="showAlert = false">{{alert.msg}}</alert>
+</div>
